@@ -22,7 +22,7 @@ const Events = () => {
       venue: "Auditorium B",
       teamSize: "Team of 2",
       icon: KeyRound,
-      status: "Registration Closed",
+      status: "Registration Open",
       color: "from-amber-500/20 to-red-500/20",
       registrationLink: "https://forms.google.com/decipher-registration"
     },
