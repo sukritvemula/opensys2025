@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, MessageSquare, Twitter, MessageCircle, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Github, Instagram } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState, useRef } from "react";
 
