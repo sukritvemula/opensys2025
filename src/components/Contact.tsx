@@ -81,22 +81,16 @@ const Contact = () => {
       color: "hover:bg-[#5865F2]"
     },
     {
-      name: "Twitter",
-      icon: Twitter,
-      url: "https://twitter.com/cosc_cbit",
-      color: "hover:bg-[#1DA1F2]"
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/cbitosc",
+      color: "hover:bg-[#333333]"
     },
     {
       name: "Instagram",
       icon: Instagram,
       url: "https://www.instagram.com/cbitosc/",
       color: "hover:bg-[#E4405F]"
-    },
-    {
-      name: "WhatsApp",
-      icon: MessageCircle,
-      url: "https://wa.me/917995166572",
-      color: "hover:bg-[#25D366]"
     }
   ];
 
