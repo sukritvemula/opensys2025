@@ -1,0 +1,18 @@
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+@media (max-width: 767px) {
+  .navbar .cosc-logo {
+    margin-right: auto;
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+  
+  .navbar .hamburger-menu {
+    margin-left: 1rem;
+  }
+}

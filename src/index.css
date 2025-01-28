@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-offWhite text-softBlack font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-clash font-bold;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-warmWhite/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy/20 rounded-full border-2 border-warmWhite/50 hover:bg-navy/40 transition-colors;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-4 py-2 text-navy hover:text-coral transition-colors duration-200;
+  }
+
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+
+  .bento-card {
+    @apply glass-panel p-6 rounded-2xl transition-all duration-300 hover:shadow-xl;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+    box-shadow: 0 20px 40px rgba(26, 30, 79, 0.1);
+  }
+
+  .section-padding {
+    @apply py-20 px-4 md:px-8;
+  }
+
+  .cosc-logo {
+    @apply flex flex-col items-center;
+  }
+
+  .cosc-logo span {
+    @apply text-xs sm:text-sm md:text-xl font-clash font-semibold leading-none;
+  }
+}
+
+.grid-background {
+  background-image: linear-gradient(to right, rgba(26, 30, 79, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 30, 79, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.5s ease-out forwards;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .navbar {
+    @apply px-4;
+  }
+
+  .cosc-logo {
+    @apply mr-auto;
+  }
+
+  .hamburger-menu {
+    @apply ml-4;
+  }
+}
