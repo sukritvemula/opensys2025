@@ -77,7 +77,7 @@ const Contact = () => {
     {
       name: "Discord",
       icon: MessageSquare,
-      url: "https://discord.gg/opensys",
+      url: "https://discord.com/invite/BCBvtyPsEt",
       color: "hover:bg-[#5865F2]"
     },
     {
@@ -89,7 +89,7 @@ const Contact = () => {
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://instagram.com/cosc_cbit",
+      url: "https://www.instagram.com/cbitosc/",
       color: "hover:bg-[#E4405F]"
     },
     {
