@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, MessageSquare, Github, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Github, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState, useRef } from "react";
 
@@ -91,6 +91,24 @@ const Contact = () => {
       icon: Instagram,
       url: "https://www.instagram.com/cbitosc/",
       color: "hover:bg-[#E4405F]"
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      url: "https://www.facebook.com/cbitosc",
+      color: "hover:bg-[#1877F2]"
+    },
+    {
+      name: "X",
+      icon: Twitter, // X (formerly Twitter) icon
+      url: "https://twitter.com/cbitosc",
+      color: "hover:bg-[#000000]"
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://www.linkedin.com/company/cbitosc",
+      color: "hover:bg-[#0A66C2]"
     }
   ];
 
@@ -129,10 +147,10 @@ const Contact = () => {
                     <h3 className="font-bold text-navy mb-1">Contact</h3>
                     <div className="space-y-1">
                       <a href="tel:+917995166572" className="block text-softBlack/80 hover:text-coral transition-colors">
-                        Sai Kiran: +91 7995166572
+                        Muzaffar: +91 95425 90164
                       </a>
                       <a href="tel:+919442621187" className="block text-softBlack/80 hover:text-coral transition-colors">
-                        Akil: +91 9442621187
+                        Imaduddin: +91 90528 12005
                       </a>
                     </div>
                   </div>
@@ -178,6 +196,41 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      <div className="mt-12 pt-8 border-t border-navy/10">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-navy mb-4">Related Links</h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="https://cbit.ac.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-softBlack/80 hover:text-coral transition-colors"
+              >
+                CBIT
+              </a>
+              <a
+                href="https://cbitosc.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-softBlack/80 hover:text-coral transition-colors"
+              >
+                COSC Official Website
+              </a>
+              <a
+                href="https://cbit-hacktoberfest24.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-softBlack/80 hover:text-coral transition-colors"
+              >
+                HacktoberFest'24
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div className="mt-16 pt-8 border-t border-navy/10">
         <div className="container mx-auto px-4">
