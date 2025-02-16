@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Events from "@/components/Events";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
+import Countdown from "@/components/countdown/Countdown";
 
 const Index = () => {
   return (
