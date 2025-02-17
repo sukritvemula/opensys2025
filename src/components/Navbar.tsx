@@ -1,151 +1,93 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import "./Navbar.css";
+import gsap from "gsap";
+import opensys from "./logo512.png"
+import cosc from "./LogoCOSC.svg"
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-
+function Navbar() {
+  const navRef = useRef(null);
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const navigation = navRef.current;
+    if (!navigation) return;
+    const anchors = navigation.querySelectorAll("a");
+    let previous = null;
+    const getNodes = (item) => [
+      gsap.utils.shuffle(gsap.utils.selector(item)(".blue rect")),
+      gsap.utils.shuffle(gsap.utils.selector(item)(".pink rect")),
+    ];
+    
+    const handlePrevious = () => {
+      if (previous) {
+        previous.classList.remove("active");
+        const nodes = getNodes(previous);
+        
+        gsap.killTweensOf(nodes[0]);
+        gsap.killTweensOf(nodes[1]);
+        
+        gsap.to(nodes[0], {
+          duration: 0.4,
+          ease: "power1.out",
+          attr: { x: "-101%" },
+          overwrite: "auto",
+        });
+        
+        gsap.to(nodes[1], {
+          duration: 0.4,
+          ease: "power1.out",
+          attr: { x: "-101%" },
+          delay: 0.05,
+          overwrite: "auto",
+        });
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    const handleCurrent = (anchor) => {
+      handlePrevious();
+      anchor.classList.add("active");
+      previous = anchor;
+      const nodes = getNodes(anchor);
+      gsap.to(nodes[0], { duration: 1.2, ease: "elastic.out(1, 0.3)", attr: { x: "0%" }, stagger: 0.012 });
+      gsap.to(nodes[1], { duration: 1.2, ease: "elastic.out(1, 0.3)", attr: { x: "0%" }, stagger: 0.012, delay: 0.1 });
+    };
+
+    anchors.forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleCurrent(anchor);
+      });
+    });
+
+    return () => {
+      anchors.forEach((anchor) => anchor.removeEventListener("click", handleCurrent));
+    };
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
-  };
-
-  const navItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "events", label: "Events" },
-    { id: "faq", label: "FAQ" },
-    { id: "contact", label: "Contact" },
-  ];
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-2" : "py-4"
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="glass-panel rounded-full px-4 md:px-6 py-3 flex items-center justify-between backdrop-blur-md bg-white/80"
-          layout
-        >
-          <motion.div 
-            className="flex items-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <img 
-              src="/logo.png" 
-              alt="COSC Logo"
-              className="h-8 md:h-10 w-auto cursor-pointer"
-              onClick={() => scrollToSection("home")}
-            />
-          </motion.div>
-
-          <div className="hidden md:flex items-center gap-6">
-            <LayoutGroup>
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="relative px-4 py-2 text-navy text-sm font-medium"
-                  onHoverStart={() => setHoveredItem(item.id)}
-                  onHoverEnd={() => setHoveredItem(null)}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {hoveredItem === item.id && (
-                    <motion.div
-                      layoutId="nav-bubble"
-                      className="absolute inset-0 bg-coral/10 rounded-full -z-10"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{
-                        type: "spring",
-                        bounce: 0.2,
-                        duration: 0.6
-                      }}
-                    />
-                  )}
-                  {item.label}
-                </motion.button>
-              ))}
-            </LayoutGroup>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                onClick={() => scrollToSection("events")}
-                className="rounded-full px-6 py-2 bg-gradient-to-r from-coral to-coral/90 text-white hover:from-coral/90 hover:to-coral transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                Register Now
-              </Button>
-            </motion.div>
-          </div>
-
-          <motion.button
-            className="md:hidden p-2 text-navy hover:text-coral transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </motion.div>
-
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="md:hidden overflow-hidden mt-2"
-            >
-              <div className="glass-panel rounded-xl p-4 space-y-4 backdrop-blur-md bg-white/80">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left px-4 py-2 text-navy hover:text-coral transition-colors rounded-lg hover:bg-coral/5"
-                    whileHover={{ x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item.label}
-                  </motion.button>
-                ))}
-                <Button
-                  onClick={() => scrollToSection("events")}
-                  className="w-full rounded-full px-6 py-2 bg-gradient-to-r from-coral to-coral/90 text-white hover:from-coral/90 hover:to-coral transition-all duration-300 shadow-md hover:shadow-lg"
-                >
-                  Register Now
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <nav ref={navRef}>
+      <div className="logo-container">
+        <img className="logo" src={cosc} alt="" />
+        <span style={{color:"white"}}>|</span>
+        <img className="logo" src={opensys} alt="" />
       </div>
-    </motion.nav>
+      <div className="nav-links">
+        {["Home", "About","Events","FAQs","Contact"].map((text) => (
+          <a href="#" key={text}>
+            <span>{text}</span>
+            <svg height="6px" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <g className="pink">
+                <rect x="-101%" y="0" width="100%" height="3"></rect>
+                <rect x="-101%" y="3" width="100%" height="3"></rect>
+              </g>
+              <g className="blue">
+                <rect x="-101%" y="0" width="100%" height="3"></rect>
+                <rect x="-101%" y="3" width="100%" height="3"></rect>
+              </g>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </nav>
   );
-};
+}
 
 export default Navbar;
