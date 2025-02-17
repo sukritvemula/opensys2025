@@ -30,8 +30,135 @@
     @apply border-border;
   }
 
+  @import url("https://use.typekit.net/ers2qgl.css");
+
   body {
-    @apply bg-offWhite text-softBlack font-inter;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #000000;
+  }
+  
+  .logo {
+      display: flex;
+      justify-content: start;
+      padding: 10px;
+      width: 70px;
+      height: 70px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  nav {
+    margin: 25px 50px;
+    background: rgba(255, 255, 255, 0.27);
+    border-radius: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.2px);
+    -webkit-backdrop-filter: blur(8.2px);
+    box-shadow: 10px 10px 76px 0px rgba(0,0,0,0.30);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  nav a {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "ff-chambers-sans-web", sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    margin: 1rem 0.5rem;
+    padding: 0.7rem 2.5rem;
+    transition: color 500ms ease;
+  }
+  
+  nav a span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    white-space: nowrap;
+  }
+  
+  nav a svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: skew(-30deg);
+    transition: box-shadow 25ms 25ms;
+  }
+  
+  nav a svg rect {
+    shape-rendering: crispEdges;
+    z-index: 0;
+  }
+  
+  nav a .blue rect {
+    fill: #003cff;
+    mix-blend-mode: normal;
+  }
+  
+  nav a .pink rect {
+    fill: #e95dff;
+  }
+  
+  nav a.active svg {
+    box-shadow: 0 0 15px 3px #f8ff9c;
+  }
+  
+  @media screen and (max-width: 768px) {
+    nav {
+      margin: 15px 20px;
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .nav-links {
+      width: 100%;
+      flex-direction: column;
+    }
+  
+    nav a {
+      margin: 0.5rem 0;
+      padding: 0.5rem 1.5rem;
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    nav {
+      margin: 10px;
+    }
+    
+    nav a {
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
